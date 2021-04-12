@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import './scss/app.scss';
+import _ from 'lodash';
+import { createElement } from './util';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Heading from './components/Heading';
+import Navigation from './components/Navigation';
+import GameMenu from './components/GameMenu';
 
-export default App;
+const App = () => {
+    const element = createElement({
+        tag: 'div',
+        classes: ['main'],
+        children: [
+            Heading({ title: 'Minesweeper' }),
+            Navigation(),
+            createElement({ id: 'content', children: [GameMenu()] })
+        ]
+    });
+
+    return element;
+};
+
+document.getElementById('root').appendChild(App());
